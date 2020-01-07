@@ -151,7 +151,7 @@ func updateGroup(group, oldIP, ip, port, info string){
 func removeGroup(group, ip, port string){
 	request := ecs.CreateRevokeSecurityGroupRequest()
 	request.SecurityGroupId = group
-	request.RegionId = "cn-hangzhou"
+	request.RegionId = config.RegionID
 	request.IpProtocol = "tcp"
 	request.PortRange = fmt.Sprintf("%s/%s",port,port)
 	request.SourceCidrIp = ip
@@ -163,7 +163,7 @@ func removeGroup(group, ip, port string){
 func addGroup(group, ip, port, info string){
 	request := ecs.CreateAuthorizeSecurityGroupRequest()
 	request.SecurityGroupId = group
-	request.RegionId = "cn-hangzhou"
+	request.RegionId = config.RegionID
 	request.IpProtocol = "tcp"
 	request.PortRange = fmt.Sprintf("%s/%s",port,port)
 	request.SourceCidrIp = ip
