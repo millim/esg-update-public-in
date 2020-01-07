@@ -3,7 +3,8 @@
 
 
 ```bash
-nohup esg -c config.yml >./log 2>&1 &
+#-c 配置文件 -f 已有的ip地址文件
+nohup esg -c config.yml -f public_ip >./log 2>&1 &
 
 # config.yml
 regionId: cn-hangzhou

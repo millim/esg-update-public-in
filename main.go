@@ -12,7 +12,7 @@ import (
 )
 
 
-var file = "./public_ip"
+var file string
 var config Config
 
 type Group struct {
@@ -31,9 +31,16 @@ type Config struct {
 
 func main() {
 	configAdd := ""
+	file = ""
 	flag.StringVar(&configAdd,"c","", "-c config.yml")
+	flag.StringVar(&file,"f","", "-f public_ip")
 	flag.Parse()
 	println(configAdd)
+
+	if file == ""{
+		println("input public_ip path")
+		return
+	}
 
 	if !fileExists(configAdd){
 		println("no search config file, use -c config.yml")
@@ -75,6 +82,7 @@ func inspect(){
 			return
 		}
 		println(time.Now().String(),"----->","ip变了")
+		println(fmt.Sprintf("从 %s 变为了 %s", oldIP, ip))
 		updateAliyun(oldIP, ip)
 		ioutil.WriteFile(file,[]byte(ip), 0644)
 	}
